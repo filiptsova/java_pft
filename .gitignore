@@ -14,3 +14,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 sandbox/.idea/misc.xml
 sandbox/.idea/workspace.xml
+sandbox/build/classes/java/main/ru/stqa/pft/sandbox/MyFirstProgram.class
+*.class
