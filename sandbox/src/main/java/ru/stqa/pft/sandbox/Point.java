@@ -1,10 +1,14 @@
 package ru.stqa.pft.sandbox;
-import java.util.Scanner;
 
 public class Point {
-    Scanner scanner = new Scanner(System.in);
-    public double x =scanner.nextDouble();
-    public double y =scanner.nextDouble();
+    
+    public double x;
+    public double y;
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public double distance(Point p) {
         double x = Math.pow((this.x - p.x), 2);
