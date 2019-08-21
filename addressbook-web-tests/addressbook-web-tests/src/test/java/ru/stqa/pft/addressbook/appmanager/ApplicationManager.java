@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,11 +18,11 @@ public class ApplicationManager {
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
+
     public void init() {
         driver = new FirefoxDriver();
-        baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get("http://localhost/addressbook/group.php");
+        driver.get("http://localhost/addressbook");
         groupHelper = new GroupHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         contactHelper = new ContactHelper(driver);
@@ -73,3 +74,4 @@ public class ApplicationManager {
         return contactHelper;
     }
 }
+

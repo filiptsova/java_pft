@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -15,7 +16,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitContactAdd() {
-      click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]"));
+      click(By.name("submit"));
     }
 
     public void fillContactForm(ContactData contactData) {
@@ -24,4 +25,29 @@ public class ContactHelper extends HelperBase {
       type(By.name("mobile"),contactData.getMobile());
       type(By.name("email"),contactData.getEmail());
     }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedContacts() {
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void confirmDeletion() {
+        try {
+            driver.switchTo().alert().accept();
+        } catch (NoAlertPresentException e) {
+            System.out.println("Окно для подтверждения удаления контакта не появилось");
+        }
+    }
+
+    public void initContactModification() {
+        click(By.xpath("//img[@src='icons/pencil.png']"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 }
+
