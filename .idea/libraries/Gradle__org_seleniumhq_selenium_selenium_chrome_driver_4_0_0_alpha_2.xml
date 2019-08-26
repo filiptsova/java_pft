@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.seleniumhq.selenium:selenium-chrome-driver:4.0.0-alpha-2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-chrome-driver/4.0.0-alpha-2/4c31ebe7c5a5f44c7c953ca4b01d47a39db21774/selenium-chrome-driver-4.0.0-alpha-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-chrome-driver/4.0.0-alpha-2/6ee934fbbeb8e0719bfd4d1445f38b65a091d3a9/selenium-chrome-driver-4.0.0-alpha-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.seleniumhq.selenium:selenium-support:4.0.0-alpha-2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-support/4.0.0-alpha-2/ea2abcfc8e3456514bd2cb15dabcb765e6d72fce/selenium-support-4.0.0-alpha-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-support/4.0.0-alpha-2/29944e5dd459e91e00b6a9ff397cd0505f8fd5b1/selenium-support-4.0.0-alpha-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
