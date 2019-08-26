@@ -47,3 +47,6 @@ addressbook-web-tests/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_r
 addressbook-web-tests/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_safari_driver_4_0_0_alpha_2.xml
 addressbook-web-tests/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_support_4_0_0_alpha_2.xml
 addressbook-web-tests/.idea/libraries/Gradle__org_testng_testng_7_0_0_beta7.xml
+.idea/modules/sandbox.iml
+.idea/modules/sandbox.iml
+*.iml

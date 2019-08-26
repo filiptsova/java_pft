@@ -28,10 +28,11 @@ public class ApplicationManager {
 
     public void init() {
         if (browser.equals(BrowserType.FIREFOX)) {
-            driver = new FirefoxDriver();
-        } else {
-            driver = new ChromeDriver();
-        }
+          driver = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.CHROME))
+        {
+          driver = new ChromeDriver();
+        } 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook");
         groupHelper = new GroupHelper(driver);
