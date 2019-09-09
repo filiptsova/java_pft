@@ -30,7 +30,7 @@ public class ApplicationManager {
     public void init() {
         if (browser.equals(BrowserType.FIREFOX)) {
             driver = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)) {
+        } else {
             driver = new ChromeDriver();
         }
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -74,15 +74,15 @@ public class ApplicationManager {
       }
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 }
