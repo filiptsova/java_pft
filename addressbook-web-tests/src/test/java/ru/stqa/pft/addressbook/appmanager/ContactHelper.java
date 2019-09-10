@@ -74,8 +74,9 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void initContactModification() {
-        click(By.xpath("//img[@src='icons/pencil.png']"));
+    public void initContactModification(int id) {
+        driver.findElement(By.xpath("//a[@href='edit.php?id=" + id +"']")).click();
+        System.out.println(id);
     }
 
     public void submitContactModification() {
@@ -101,7 +102,7 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact) {
         selectContactById(contact.getId());
-        initContactModification();
+        initContactModification(contact.getId());
         fillContactForm(contact);
         submitContactModification();
         returnToHomePage();

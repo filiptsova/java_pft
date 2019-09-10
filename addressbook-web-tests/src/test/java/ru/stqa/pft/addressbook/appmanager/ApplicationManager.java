@@ -30,8 +30,10 @@ public class ApplicationManager {
     public void init() {
         if (browser.equals(BrowserType.FIREFOX)) {
             driver = new FirefoxDriver();
-        } else {
+        } else if (browser.equals(BrowserType.CHROME)){
             driver = new ChromeDriver();
+        } else {
+            System.out.println("Unknown browser");
         }
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook");

@@ -21,11 +21,11 @@ public class ContactModificationTests extends TestBase {
     public void testContactModificationTests(){
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Ivan").withLastname("Ivanov").withMobile("89993345223").withEmail("ii@relex.ru");
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Alex").withLastname("wZverev").withMobile("89993345223").withEmail("ii@relex.ru");
         app.contact().modify(contact);
         Contacts after = app.contact().all();
         assertEquals(after.size(), before.size());
 
-        assertThat(before, equalTo(before.withOut(modifiedContact).withAdded(contact)));
+        assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
     }
 }
