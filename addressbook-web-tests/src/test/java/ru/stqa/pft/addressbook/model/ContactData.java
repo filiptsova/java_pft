@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import org.checkerframework.checker.units.qual.C;
+
 import java.util.Objects;
 
 public class ContactData {
@@ -7,11 +9,16 @@ public class ContactData {
     private String firstname;
     private String lastname;
     private String mobile;
+    private String home;
+    private String work;
+    private String allPhones;
     private String email;
+    private String email2;
+    private String email3;
+    private String allEmails;
+    private String address;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -38,19 +45,62 @@ public class ContactData {
         return this;
     }
 
+    public String getHome() { return home; }
+
+    public ContactData withHome(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public String getWork() { return work; }
+
+    public ContactData withWork(String work) {
+        this.work = work;
+        return this;
+    }
+
+    public String getAllPhones() { return allPhones; }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getEmail2() { return email2; }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() { return email3; }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public String getAllEmails() { return allEmails; }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public String getAddress() { return address; }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
     public String getFirstname() { return firstname; }
 
-    public String getLastname() {
-        return lastname;
-    }
+    public String getLastname() { return lastname; }
 
-    public String getMobile() {
-        return mobile;
-    }
+    public String getMobile() { return mobile; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
     @Override
     public String toString() {
