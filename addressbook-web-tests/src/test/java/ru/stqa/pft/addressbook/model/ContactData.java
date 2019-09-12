@@ -1,17 +1,22 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.Objects;
 
 public class ContactData {
     private  int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String mobile;
     private String home;
     private String work;
     private String allPhones;
+    @Expose
     private String email;
     private String email2;
     private String email3;
