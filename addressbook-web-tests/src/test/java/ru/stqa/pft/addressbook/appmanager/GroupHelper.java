@@ -20,6 +20,11 @@ public class GroupHelper extends HelperBase {
         click(By.linkText("group page"));
     }
 
+    public int count() {
+
+        return driver.findElements(By.name("selected[]")).size();
+    }
+
     public void submitGroupCreation() {
         click(By.name("submit"));
     }

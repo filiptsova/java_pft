@@ -53,6 +53,7 @@ public class ContactHelper extends HelperBase {
         selectContactById(contact.getId());
         deleteSelectedContacts();
         confirmDeletion();
+        contactCache = null;
         homePage();
     }
 
@@ -65,9 +66,8 @@ public class ContactHelper extends HelperBase {
     }
 
     private void initContactModificationById(int id) {
-        driver.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
-        //driver.findElement(By.xpath("//a[@href='edit.php?id=204']")).click();
-        System.out.println(id);
+        //driver.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+        driver.findElement(By.xpath("//a[@href='edit.php?id=" + id +"']")).click();
     }
 
     public void submitContactModification() {
@@ -79,6 +79,7 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
         fillContactForm(contact);
         submitContactAdd();
+        contactCache = null;
         returnToHomePage();
     }
 
@@ -86,7 +87,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
+    public int count() {
 
         return driver.findElements(By.name("selected[]")).size();
     }
@@ -96,41 +97,29 @@ public class ContactHelper extends HelperBase {
         initContactModificationById(contact.getId());
         fillContactForm(contact);
         submitContactModification();
+        contactCache = null;
         returnToHomePage();
     }
 
-/*
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<ContactData>();
-        List<WebElement> elements = driver.findElements(By.xpath("//tr[@name='entry']"));
-        for (WebElement element:elements) {
-            List<WebElement> tds = element.findElements(By.tagName("td"));
-            int id = Integer.parseInt(tds.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            String lastname = tds.get(1).getText();
-            String firstname = tds.get(2).getText();
-            String allPhones = tds.get(5).getText();
-            String allEmails = tds.get(4).getText();
-            String address = tds.get(3).getText();
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
-        }
-        return contacts;
-    }*/
-
+    private Contacts contactCache = null;
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache !=null){
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element:elements) {
             List<WebElement> tds = element.findElements(By.tagName("td"));
-            int id = Integer.parseInt(tds.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastname = tds.get(1).getText();
             String firstname = tds.get(2).getText();
             String allPhones = tds.get(5).getText();
             String allEmails = tds.get(4).getText();
             String address = tds.get(3).getText();
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     public ContactData infoFromEditionForm(ContactData contact) {
