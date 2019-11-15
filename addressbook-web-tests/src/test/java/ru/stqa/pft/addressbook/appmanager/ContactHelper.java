@@ -46,12 +46,23 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContacts() {
+        //click(By.cssSelector("input[value='Delete']"));
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void delete(ContactData contact) {
+    public void delete(ContactData contact){
         selectContactById(contact.getId());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         deleteSelectedContacts();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         confirmDeletion();
         contactCache = null;
         homePage();
@@ -109,6 +120,7 @@ public class ContactHelper extends HelperBase {
         }
         contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.xpath("//tr[@name='entry']"));
+        System.out.println(elements);
         for (WebElement element:elements) {
             List<WebElement> tds = element.findElements(By.tagName("td"));
             String lastname = tds.get(1).getText();
