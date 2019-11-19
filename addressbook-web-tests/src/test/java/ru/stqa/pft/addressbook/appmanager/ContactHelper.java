@@ -65,6 +65,7 @@ public class ContactHelper extends HelperBase {
         }
         confirmDeletion();
         contactCache = null;
+        driver.findElement(By.cssSelector("div.msgbox"));
         homePage();
     }
 
@@ -105,6 +106,11 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact) {
         selectContactById(contact.getId());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         initContactModificationById(contact.getId());
         fillContactForm(contact);
         submitContactModification();

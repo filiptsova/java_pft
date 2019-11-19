@@ -76,6 +76,11 @@ public class GroupHelper extends HelperBase {
 
     public void modify(GroupData group) {
         selectGroupById(group.getId());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();

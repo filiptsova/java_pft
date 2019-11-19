@@ -1,17 +1,5 @@
-<list>
-  <group>
-    <name>test 0</name>
-    <header>test 0</header>
-    <footer>test 0</footer>
-  </group>
-  <group>
-    <name>test 1</name>
-    <header>test 1</header>
-    <footer>test 1</footer>
-  </group>
-  <group>
-    <name>test 2</name>
-    <header>test 2</header>
-    <footer>test 2</footer>
-  </group>
-</list>
+test 0;test 0;test 0
+test 1;test 1;test 1
+test 2;test 2;test 2
+test 3;test 3;test 3
+test 4;test 4;test 4
