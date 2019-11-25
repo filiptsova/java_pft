@@ -21,6 +21,8 @@ public class ContactModificationTests extends TestBase {
     public void testContactModificationTests(){
         Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
+        System.out.println(modifiedContact);
+
         ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Alex").withLastname("wZverev").withMobile("89993345223").withEmail("ii@relex.ru").withHome("22-22-22").withWork("33 33 33")
                 .withEmail("ii@relex.ru").withEmail2("ii12@relex.ru").withEmail3("ii_pp@relex.ru").withAddress("438 DARK SPURT\n" + "SAN FRANCISCO\n" + "CA 94528\n" + "USA");
         app.goTo().homePage();

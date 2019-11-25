@@ -19,7 +19,6 @@ public class GroupModificationTests extends TestBase {
         }
     }
 
-
     @Test
     public void testGroupModificationTests (){
         Groups before = app.db().groups();

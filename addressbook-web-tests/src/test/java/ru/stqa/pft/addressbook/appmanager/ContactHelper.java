@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -18,31 +18,43 @@ public class ContactHelper extends HelperBase {
     }
 
     public void returnToHomePage() {
-      click(By.linkText("home page"));
+        click(By.linkText("home page"));
     }
 
-    public void homePage(){
+    public void homePage() {
         click(By.linkText("home"));
     }
 
     public void submitContactAdd() {
-      click(By.name("submit"));
+        click(By.name("submit"));
     }
 
     public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"),contactData.getFirstname());
-        type(By.name("lastname"),contactData.getLastname());
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getLastname());
         type(By.name("work"), contactData.getWork());
         type(By.name("home"), contactData.getHome());
-        type(By.name("mobile"),contactData.getMobile());
-        type(By.name("email"),contactData.getEmail());
-        type(By.name("email2"),contactData.getEmail2());
-        type(By.name("email3"),contactData.getEmail3());
-        type(By.name("address"),contactData.getAddress());
+        type(By.name("mobile"), contactData.getMobile());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+        type(By.name("address"), contactData.getAddress());
     }
 
-    public void selectContactById(int id){
-        driver.findElement(By.cssSelector("input[value='"+ id +"']")).click();
+    public void selectContactById(int id) {
+        driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    public void selectGroupByName(String name){
+        Select groupSelect = new Select(driver.findElement(By.name("to_group")));
+        groupSelect.selectByVisibleText(name);
+    }
+
+    public void selectGroup (String name){
+        Select groupSelect = new Select(driver.findElement(By.name("group")));
+        //System.out.println(groupSelect);
+        groupSelect.selectByVisibleText(name);
+        contactCache=null;
     }
 
     public void deleteSelectedContacts() {
@@ -50,19 +62,9 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void delete(ContactData contact){
+    public void delete(ContactData contact) {
         selectContactById(contact.getId());
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         deleteSelectedContacts();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         confirmDeletion();
         contactCache = null;
         driver.findElement(By.cssSelector("div.msgbox"));
@@ -79,15 +81,14 @@ public class ContactHelper extends HelperBase {
 
     private void initContactModificationById(int id) {
         //driver.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
-        driver.findElement(By.xpath("//a[@href='edit.php?id=" + id +"']")).click();
+        driver.findElement(By.xpath("//a[@href='edit.php?id=" + id + "']")).click();
     }
 
     public void submitContactModification() {
         click(By.name("update"));
     }
 
-    public void create(ContactData contact)
-    {
+    public void create(ContactData contact) {
         click(By.linkText("add new"));
         fillContactForm(contact);
         submitContactAdd();
@@ -106,11 +107,6 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact) {
         selectContactById(contact.getId());
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         initContactModificationById(contact.getId());
         fillContactForm(contact);
         submitContactModification();
@@ -121,13 +117,13 @@ public class ContactHelper extends HelperBase {
     private Contacts contactCache = null;
 
     public Contacts all() {
-        if (contactCache !=null){
+        if (contactCache != null) {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.xpath("//tr[@name='entry']"));
         System.out.println(elements);
-        for (WebElement element:elements) {
+        for (WebElement element : elements) {
             List<WebElement> tds = element.findElements(By.tagName("td"));
             String lastname = tds.get(1).getText();
             String firstname = tds.get(2).getText();
@@ -154,5 +150,24 @@ public class ContactHelper extends HelperBase {
         driver.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withHome(home).withMobile(mobile).withWork(work).withEmail(email).withEmail2(email2).withEmail3(email3)
                 .withAddress(address);
+    }
+
+    public void addInGroup(ContactData contact, GroupData group) {
+
+        homePage();
+
+        selectContactById(contact.getId());
+        selectGroupByName(group.getName());
+
+        driver.findElement(By.xpath("//input[@value='Add to']")).click();
+        driver.findElement(By.partialLinkText("group page")).click();
+        contactCache = null;
+    }
+
+    public void deleteFromGroup(ContactData contact) {
+        selectContactById(contact.getId());
+        driver.findElement(By.xpath("//input[@name='remove']")).click();
+        driver.findElement(By.partialLinkText("group page")).click();
+        contactCache = null;
     }
 }
