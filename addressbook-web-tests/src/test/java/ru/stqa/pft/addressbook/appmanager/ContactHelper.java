@@ -154,7 +154,7 @@ public class ContactHelper extends HelperBase {
 
     public void addInGroup(ContactData contact, GroupData group) {
 
-        homePage();
+        driver.findElement(By.xpath("//img[@id='logo']")).click();
 
         selectContactById(contact.getId());
         selectGroupByName(group.getName());

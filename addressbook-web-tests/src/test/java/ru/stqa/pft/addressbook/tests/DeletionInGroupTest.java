@@ -9,8 +9,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Collections;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DeletionInGroupTest extends TestBase {
@@ -33,21 +32,19 @@ public class DeletionInGroupTest extends TestBase {
         app.goTo().homePage();
         app.contact().selectGroup(selectedGroup);
         if (app.contact().all().size()==0){
-            app.goTo().homePage();
-            app.contact().create(new ContactData().withFirstname("Ivan").withLastname("Ivanov").withMobile("89993345223").withEmail("ii@relex.ru"));
-            Contacts contacts = app.contact().all();
-            ContactData contactForAdded = Collections.max(contacts, (c1, c2) -> Integer.compare(c1.getId(), c2.getId()));
+            app.contact().selectGroup("[all]");
+            ContactData contactForAdded = app.contact().all().iterator().next();
             app.contact().addInGroup(contactForAdded, groupForDeletion);
         }
     }
 
     @Test
     public void testDeletionInGroup(){
-        Contacts contacts = app.contact().all();
-        ContactData contactForDeletion = contacts.iterator().next();
+        Contacts before = app.contact().all();
+        ContactData contactForDeletion = before.iterator().next();
         System.out.println(contactForDeletion);
         app.contact().deleteFromGroup(contactForDeletion);
         Contacts after = app.contact().all();
-        assertThat(after, not(hasItem(contactForDeletion)));
+        assertThat(after, equalTo(before.withOut(contactForDeletion)));
     }
 }
