@@ -29,23 +29,20 @@ public class AdditionInGroupTest extends TestBase {
     }
     @Test
     public void testAdditionInGroup (){
-        app.goTo().groupPage();
-        Groups groups = app.group().all();
-        app.goTo().homePage();
-        Contacts contacts = app.contact().all();
+        Groups groups = app.db().groups();
+        Contacts contacts = app.db().contacts();
         ContactData contactForAdded = null;
-        Contacts before = null;
         GroupData groupToAdded = null;
+        Contacts before = null;
         for (GroupData group : groups) {
-            app.contact().selectGroup(group.getName());
-            Contacts contactsInGroup = app.contact().all();
+            Contacts contactsInGroup = app.db().contactsInGroup(group.getId());
             for (ContactData contact : contacts) {
-               if (!contactsInGroup.contains(contact)){
-                   contactForAdded = contact;
-                   groupToAdded = group;
-                   before = contactsInGroup;
-                   break;
-               }
+                if (!contactsInGroup.contains(contact)){
+                    contactForAdded = contact;
+                    groupToAdded = group;
+                    before = contactsInGroup;
+                    break;
+                }
             }
         }
         System.out.println(contactForAdded);
@@ -56,10 +53,11 @@ public class AdditionInGroupTest extends TestBase {
             app.group().create(groupToAdded);
             contactForAdded = contacts.iterator().next();
             app.contact().selectGroup(groupToAdded.getName());
-            before = app.contact().all();
+            before = app.db().contactsInGroup(groupToAdded.getId());
         }
         app.contact().addInGroup(contactForAdded, groupToAdded);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contactsInGroup(groupToAdded.getId());
+
         assertThat(after, equalTo(before.withAdded(contactForAdded)));
     }
 }
