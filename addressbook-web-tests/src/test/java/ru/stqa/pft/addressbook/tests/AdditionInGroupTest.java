@@ -14,6 +14,7 @@ import java.util.Collections;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertTrue;
 
 public class AdditionInGroupTest extends TestBase {
     @BeforeMethod
@@ -37,12 +38,12 @@ public class AdditionInGroupTest extends TestBase {
         for (GroupData group : groups) {
             Contacts contactsInGroup = app.db().contactsInGroup(group.getId());
             for (ContactData contact : contacts) {
-                if (!contactsInGroup.contains(contact)){
-                    contactForAdded = contact;
-                    groupToAdded = group;
-                    before = contactsInGroup;
-                    break;
-                }
+               if (!contactsInGroup.contains(contact)){
+                   contactForAdded = contact;
+                   groupToAdded = group;
+                   before = contactsInGroup;
+                   break;
+               }
             }
         }
         System.out.println(contactForAdded);

@@ -16,6 +16,10 @@ public class ContactData {
     @Column(name = "id")
     private  int id = Integer.MAX_VALUE;
 
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable (name = "address_in_groups", joinColumns = @JoinColumn (name = "id"), inverseJoinColumns = @JoinColumn (name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     @Expose
     @Column(name = "firstname")
     private String firstname;
@@ -59,10 +63,6 @@ public class ContactData {
     @Column(name = "address")
     @Type(type = "text")
     private String address;
-
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable (name = "address_in_groups", joinColumns = @JoinColumn (name = "id"), inverseJoinColumns = @JoinColumn (name = "group_id"))
-    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public int getId() { return id; }
 
@@ -171,6 +171,8 @@ public class ContactData {
                 "id='" + id + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 

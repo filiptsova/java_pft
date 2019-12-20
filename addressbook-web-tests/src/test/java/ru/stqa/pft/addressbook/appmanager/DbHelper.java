@@ -41,12 +41,12 @@ public class DbHelper {
             return new Contacts(result);
         }
 
-    public Contacts contactsInGroup(int idOfGroup){
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<ContactData> result = session.createQuery ("select c from ContactData c join c.groups g where g.id = " + idOfGroup).list();
-        session.getTransaction().commit();
-        session.close();
-        return new Contacts(result);
-    }
+        public Contacts contactsInGroup(int idOfGroup){
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            List<ContactData> result = session.createQuery ("select c from ContactData c join c.groups g where g.id = " + idOfGroup).list();
+            session.getTransaction().commit();
+            session.close();
+            return new Contacts(result);
+        }
     }

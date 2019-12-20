@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import jdk.internal.instrumentation.TypeMapping;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;

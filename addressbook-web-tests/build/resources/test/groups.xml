@@ -4,4 +4,9 @@
     <header>test 0</header>
     <footer>test 0</footer>
   </group>
+  <group>
+    <name>test 1</name>
+    <header>test 2</header>
+    <footer>test 3</footer>
+  </group>
 </list>
